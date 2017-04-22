@@ -1,0 +1,112 @@
+<!--
+<html ng-app="todo">
+<head>
+    <title>ToDo List</title>
+    <link rel="shortcut icon" href="/images/create contacts.ico" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    &lt;!&ndash; Optional theme &ndash;&gt;
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+    <script>
+        var app = angular.module('todo', ['ngRoute', 'ngCookies']);
+
+        app.config(function($routeProvider, $locationProvider) {
+            $routeProvider
+                    .when('/', {
+                        templateUrl: '/home.ejs',
+                        controller: 'HomeController',
+                    })
+                    .when('/signup', {
+                        templateUrl: '/signup.ejs',
+                        controller: 'SignupController',
+                    });
+        });
+
+        app.run(function($rootScope, $cookies) {
+            if ($cookies.get('token') && $cookies.get('currentUser')) {
+                $rootScope.token = $cookies.get('token');
+                $rootScope.currentUser = $cookies.get('currentUser');
+            }
+        });
+
+        app.controller('HomeController', function($rootScope, $scope, $http, $cookies) {
+
+
+           /* $scope.submitNewNote = function() {
+                $http.post('/notes',
+                        {newNote: $scope.newNote},
+                        {headers: {
+                            'authorization': $rootScope.token
+                        }}).then(function() {
+                    getNotes();
+                    $scope.newNote = '';
+                });
+            };
+
+            $scope.removeNote = function(note) {
+                $http.put('/notes/remove',
+                        {note: note},
+                        {headers: {
+                            'authorization': $rootScope.token
+                        }}).then(function() {
+                    getNotes();
+                });
+            };*/
+
+            $scope.signin = function() {
+                $http.put('/users/signin', {username: $scope.username, password: $scope.password}).then(function(res) {
+                    $cookies.put('token', res.data.token);
+                    $cookies.put('currentUser', $scope.username);
+                    $rootScope.token = res.data.token;
+                    $rootScope.currentUser = $scope.username;
+                }, function(err) {
+                    alert('bad login credentials');
+                });
+            };
+
+            $scope.logout = function() {
+                $cookies.remove('token');
+                $cookies.remove('currentUser');
+                $rootScope.token = null;
+                $rootScope.currentUser = null;
+            };
+
+            /*function getNotes() {
+                $http.get('/notes').then(function(res) {
+
+                    $scope.notes = res.data;
+
+                });
+            }
+
+            getNotes();
+*/
+
+        });
+
+        app.controller('SignupController', function($scope, $http) {
+
+            $scope.submitSignup = function() {
+                var newUser = {
+                    username: $scope.username,
+                    password: $scope.password
+                };
+                $http.post('/users', newUser).then(function() {
+                    alert('success');
+                });
+            }
+
+        });
+
+    </script>
+</head>
+<body>
+<div ng-view></div>
+</body>
+</html>-->

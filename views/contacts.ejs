@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<title>Contact List by Naresh</title>
+<head>
+<link rel="shortcut icon" href="/images/Naresh33.ico" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!--  Bootstrap links  -->
+        <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" />
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.ie.min.css" />
+    <![endif]-->
+
+    <style>
+        html {
+            height: 100%;
+            box-sizing: border-box;
+        }
+        body {
+            position: relative;
+            margin: 0;
+            padding-bottom: 6rem;
+            min-height: 100%;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+        hr.style {
+            height: 30px;
+            border-style: solid;
+            border-color: #8c8b8b;
+            border-width: 1px 0 0 0;
+            border-radius: 20px;
+        }
+        hr.style:before {
+            display: block;
+            content: "";
+            height: 30px;
+            margin-top: -31px;
+            border-style: solid;
+            border-color: #8c8b8b;
+            border-width: 0 0 1px 0;
+            border-radius: 20px;
+        }
+        img {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: -1;
+        }
+
+        .logo {
+            margin-left: 5px;
+        }
+        .active {
+            position: absolute;
+            top: 5px;
+        }
+
+        .ribbon{
+            position: absolute;
+            top: 110px;
+            width: 230px;
+            padding: 1px 0;
+            background: #000;
+            color: #eee;
+            z-index: 60;
+
+            -moz-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            -webkit-box-sizing: content-box;
+            -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            box-sizing: content-box;
+        }
+
+        .ribbon.right{
+            right: -42px;
+            -moz-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .ribbon a,
+        .ribbon a:visited,
+        .ribbon a:active,
+        .ribbon a:hover{
+            display: block;
+            padding: 1px 0;
+            height: 24px;
+            line-height: 24px;
+
+            color: inherit;
+            text-align: center;
+            text-decoration: none;
+            font-family: 'Cabin Condensed', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+
+            border: 1px solid rgba(255,255,255,0.3);
+
+            -moz-text-shadow: 0 0 10px rgba(0,0,0,0.31);
+            -webkit-text-shadow: 0 0 10px rgba(0,0,0,0.31);
+            text-shadow: 0 0 10px rgba(0,0,0,0.31);
+        }
+
+        .ribbon.green{
+            background: #0a0;
+        }
+
+        .ribbon.orange{
+            background: #d80;
+        }
+
+
+
+        .footer {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            padding: 1rem;
+            background-color: #000000;
+            text-align: center;
+        }
+        ul.social-network {
+            list-style: none;
+            display: inline;
+            margin-left:0 !important;
+            padding: 0;
+        }
+        ul.social-network li {
+            display: inline;
+            margin: 0 5px;
+        }
+        /* footer social icons */
+        .social-network a.icoFacebook:hover {
+            background-color:#3B5998;
+        }
+        .social-network a.icoTwitter:hover {
+            background-color:#33ccff;
+        }
+        .social-network a.icoGoogle:hover {
+            background-color:#BD3518;
+        }
+        .social-network a.icoLinkedin:hover {
+            background-color:#007bb7;
+        }
+        .social-circle li a {
+            display:inline-block;
+            position:relative;
+            margin:0 auto 0 auto;
+            -moz-border-radius:50%;
+            -webkit-border-radius:50%;
+            border-radius:50%;
+            text-align:center;
+            width: 50px;
+            height: 50px;
+            font-size:20px;
+        }
+        .social-circle li i {
+            margin:0;
+            line-height:50px;
+            text-align: center;
+        }
+
+        .social-circle li a:hover i, .triggeredHover {
+            -moz-transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+            -ms--transform: rotate(360deg);
+            transform: rotate(360deg);
+            -webkit-transition: all 0.2s;
+            -moz-transition: all 0.2s;
+            -o-transition: all 0.2s;
+            -ms-transition: all 0.2s;
+            transition: all 0.2s;
+        }
+        .social-circle i {
+            color: #fff;
+            -webkit-transition: all 0.8s;
+            -moz-transition: all 0.8s;
+            -o-transition: all 0.8s;
+            -ms-transition: all 0.8s;
+            transition: all 0.8s;
+        }
+    </style>
+</head>
+<body ng-controller="AppCtrl">
+
+
+<!--
+<div ng-app="myApp" ng-controller="myCtrl">
+    <input ng-model="firstname">
+    <h3>{{firstname}}</h3>
+</div>-->
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/contacts"><img class="logo" src="./images/contacts.jpg" width="85" height="50"></a>
+        </div>
+        <ul class="nav nav-pills navbar-right">
+            <li role="presentation" class="active"><a href="/contacts"><i class="glyphicon glyphicon-phone-alt"></i> Create Contacts <span class="badge">{{contactlist.length}}</span></a></li>
+        </ul>
+        <form class="navbar-form navbar-right">
+            <div class="input-group">
+                <input type="text" class="form-control" name="name" ng-model="searchText" placeholder="Search">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</nav>
+<div class="progress" style="height:9px;width: 200%">
+    <div class="progress-bar progress-bar-success progress-bar-striped" style="height:9px;width: 10%">
+        <span class="sr-only">35% Complete (success)</span>
+    </div>
+    <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="10" style="height:9px;width: 10%">
+        <span class="sr-only">20% Complete (warning)</span>
+    </div>
+    <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar"
+         aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="height:9px;width: 10%">
+        <span class="sr-only">10% Complete (danger)</span>
+    </div>
+    <div class="progress-bar progress-bar-info progress-bar-striped" style="height:9px;width: 10%">
+        <span class="sr-only">10% Complete (danger)</span>
+    </div>
+    <div class="progress-bar progress-bar-danger progress-bar-striped" style="height:9px;width: 20%">
+        <span class="sr-only">10% Complete (danger)</span>
+    </div>
+</div>
+
+<div class="ribbon right orange">
+    <a class="ribbons" href="https://github.com/anaresh7777/createcontactslist">Fork me on GitHub</a>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1><span class="glyphicon glyphicon-phone-alt"></span> Contact List <small>{{contactlist.length}} Contacts</small></h1>
+        </div>
+
+        <!--<div class="col-md-offset-2 col-md-4">
+            <br>
+            <div class="input-group input-group-md">
+                <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-search"></i></span>
+                <input type="text" name="name" class="form-control" ng-model="searchText" placeholder="Search">
+            </div>
+            </div>-->
+    </div>
+    <hr class="style"> <br>
+    <!--<div class="img">
+    <img src="/images/showing.jpg" width="1350" height="800"> </div>-->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th><i class="glyphicon glyphicon-user"></i> Name</th>
+                <th><i class="glyphicon glyphicon-envelope"></i> Email</th>
+                <th><i class="glyphicon glyphicon-phone"></i> Number</th>
+                <th><i class="glyphicon glyphicon-cog"></i> Action</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+             <tr>
+                 <td><input class="form-control" ng-model="contact.name" placeholder="Full Name"></td>
+                 <td><input class="form-control" ng-model="contact.email" placeholder="Email"></td>
+                 <td><input class="form-control" ng-model="contact.number" placeholder="Phone number"></td>
+                 <td><button class="btn btn-success" ng-click="addContact()"><i class="glyphicon glyphicon-plus-sign"></i> Add Contact</button>
+                 <button class="btn btn-info" ng-click="update()"><i class="glyphicon glyphicon-ok"></i> Update</button>&nbsp;&nbsp;<button class="btn btn-primary" ng-click="deselect()"><i class="glyphicon glyphicon-remove"></i> Clear</button></td>
+
+             </tr>
+              <tr ng-repeat="contact in contactlist | orderBy:'name'| filter:searchText">
+                  <td>{{contact.name}}</td>
+                  <td>{{contact.email}}</td>
+                  <td>{{contact.number}}</td>
+                  <td><button class="btn btn-danger" ng-click="remove(contact._id)"><i class="glyphicon glyphicon-trash"></i> Remove</button>
+                  <button class="btn btn-warning" ng-click="edit(contact._id)"><i class="glyphicon glyphicon-edit"></i> Edit</button></td>
+              </tr>
+        </tbody>
+    </table>
+</div>
+<!--  ********** FOOTER ******** -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="footer">
+    <ul class="social-network social-circle">
+        <li><a href="https://www.facebook.com/profile.php?id=100006318071921" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="https://twitter.com/anaresh911" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+        <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+        <li><a href="https://www.linkedin.com/in/naresh-aithagoni-a6478813a/" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+    </ul>
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<!-- Angular min file -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script>
+    /*var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.firstname = "";
+        $scope.lastname = "";
+    });*/
+    var myApp = angular.module('myApp', []);
+    myApp.controller('AppCtrl', function($scope, $http) {
+        //console.log("Hello everyone");
+
+        var refresh = function () {
+            $http.get('/contactlist').success(function(res) {
+                console.log("I got the data");
+                $scope.contactlist = res;
+                $scope.contact = "";
+            });
+        };
+        refresh();
+        $scope.addContact = function () {
+            console.log($scope.contact);
+            $http.post('/contactlist', $scope.contact).success(function(res) {
+                console.log(res);
+                refresh();
+            });
+        };
+        $scope.remove = function (id) {
+            console.log(id);
+            $http.delete('/contactlist/' +id).success(function (res) {
+               refresh();
+            });
+        };
+        $scope.edit = function (id) {
+            console.log(id);
+            $http.get('/contactlist/' + id).success(function (res) {
+                $scope.contact = res;
+            });
+        };
+        $scope.update = function () {
+                console.log($scope.contact._id);
+            $http.put('/contactlist/' + $scope.contact._id, $scope.contact).success(function (res) {
+                refresh();
+            });
+        };
+        $scope.deselect = function () {
+            $scope.contact = "";
+        };
+
+    });
+</script>
+</body>
+</html>
+
+
